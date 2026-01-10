@@ -490,6 +490,8 @@ def create_app():
         # Same logic as instructor_assignment_detail
         activity_stats = []
         for activity in activities:
+            if not activity or not hasattr(activity, 'id'):
+                continue
             submissions = Submission.query.filter_by(activity_id=activity.id).all()
             total_submissions = len(submissions)
             # Graded = instructor approved
